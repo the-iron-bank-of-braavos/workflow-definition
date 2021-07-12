@@ -28,6 +28,3 @@ jobs:
     steps:
       - name: Deploy to Development
         run: echo "Deploying to development $APPLICATION_NAME"
-
-  
-{"mode":"full","isActive":false}
