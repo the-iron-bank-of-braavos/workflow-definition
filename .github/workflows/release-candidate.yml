@@ -31,15 +31,13 @@ jobs:
      
       - name: GitHub Script
         uses: actions/github-script@v4.0.2
-        env:
-          RUN_ID: ${{ GITHUB_RUN_ID }}
         with:
           github-token: ${{ github.token }}
           script: |
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-${{ env.RUN_ID }}-$GITHUB_RUN_ID",
+              ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-${{ env.GITHUB_RUN_ID }}-$GITHUB_RUN_ID",
               sha: context.sha
             })
             
