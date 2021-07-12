@@ -30,6 +30,7 @@ jobs:
         run: echo ${{ steps.project-version.outputs.version }}
       
       - name: Generate build number
+        id: buildnumber
         uses: einaregilsson/build-number@v3
         with:
           token: ${{secrets.github_token}}        
@@ -44,7 +45,7 @@ jobs:
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-$BUILD_NUMBER",
+              ref: "refs/tags/${{ steps.project-version.outputs.version }}-RC-${{ steps.buildnumber.outputs.build_number }}",
               sha: context.sha
             })
             
