@@ -2,9 +2,8 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - 'feature/**'
 
 jobs:
   build:
@@ -20,3 +19,11 @@ jobs:
         distribution: 'adopt'
     - name: Build with Maven
       run: mvn -B clean verify --file pom.xml
+  
+  deploy-development:
+    needs: build
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Deploy to Depleoyment
+        run: echo "Deployed!"
+  
