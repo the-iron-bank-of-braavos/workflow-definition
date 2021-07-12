@@ -4,6 +4,6 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "\nApplication successfully executed\n" );
+        System.out.println( "\n\tApplication successfully executed\n" );
     }
 }

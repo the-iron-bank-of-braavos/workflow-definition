@@ -1,9 +1,9 @@
-name: Java CI with Maven for Features
+name: Java CI with Maven in Develop
 
 on:
   push:
     branches:
-      - 'feature/**'
+      - 'develop'
 
 jobs:
   build:
@@ -27,6 +27,4 @@ jobs:
       APPLICATION_NAME: "poc-app"
     steps:
       - name: Deploy to Development
-        run: echo "Deploying to development $APPLICATION_NAME-$GITHUB_REF"
-
-  
+        run: echo "Deploying to development $APPLICATION_NAME"
