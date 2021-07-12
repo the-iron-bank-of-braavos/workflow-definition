@@ -58,7 +58,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean verify --file pom.xml
 
-  deploy-development:
+  deploy-preproduction:
     needs: build
     runs-on: ubuntu-latest
     env:

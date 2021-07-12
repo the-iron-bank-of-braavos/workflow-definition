@@ -1,0 +1,16 @@
+name: release
+
+on:
+  release:
+   types:
+     - published
+     
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    env:
+      APPLICATION_NAME: "poc-app"
+    steps:
+      - name: Deploy to Production
+        run: echo "Deploying to Production $APPLICATION_NAME-"
+  
