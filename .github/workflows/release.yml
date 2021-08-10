@@ -1,4 +1,4 @@
-name: release
+name: Creating release
 
 on:
   release:
@@ -6,11 +6,53 @@ on:
      - published
      
 jobs:
-  deploy-production:
+  prepare-release:
+    name: Prepare Release
+    outputs:
+      release-version: ${{ steps.release-version.outputs.release-version}}
     runs-on: ubuntu-latest
+    steps:
+      - id: release-version
+        name: Get release version
+        run: | 
+          echo ::set-output name=release-version::"${GITHUB_REF#refs/*/}"
+          RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Test
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }
+
+  publish-artefact:
+    name: Publish Artefact to Release Repository
+    needs: prepare-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Download last release candidate
+        run: echo Download Release Candidate
+      - name: Publishing artefact to Release Repository
+        run: echo Upload artefact to release reporotry
+  
+  retag-container-image:
+    name: Retag Container Image
+    needs: publish-artefact
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pulling last release candidate image
+        run: echo Pulling las release candidate container image
+      - name: Retag image to release
+        run: echo Retag image
+      - name: Push release container image
+        run: echo Push container image
+
+  deploy-production:
     env:
       APPLICATION_NAME: "poc-app"
+    environment: pro
+    name: Deploy to production
+    needs: retag-container-image
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to Production
         run: echo "Deploying to Production $APPLICATION_NAME-"
-  
