@@ -20,7 +20,7 @@ jobs:
       - name: Test
         run: |
           echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }
+          echo ${{ env.RELEASE_VERSION }}
 
   publish-artefact:
     name: Publish Artefact to Release Repository
